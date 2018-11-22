@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar" />
+
+	<div class="container">
+		<div class="row">
+			<form class="form-horizontal" th:action="@{/book/updateBook}" method="post"
+				enctype="multipart/form-data">
+				<fieldset>
+					<legend class="center-block">
+						Update Plant Information<span style="font-size: small"> * is a
+							required field</span>
+					</legend>
+					
+					<input hidden="hidden" name="id" th:value="${book.id}" />
+
+
+					<!-- title -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="title">* Name</label>
+
+						<div class="col-md-8">
+							<input type="text" name="title" class="form-control" id="title"
+								th:value="${book.title}" required="required" placeholder="Name" />
+							<span class="help-block">Plant Name</span>
+						</div>
+					</div>
+
+					<!-- author -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="author">*
+							Origin</label>
+						<div class="col-md-8">
+							<input type="text" name="author" class="form-control" id="author"
+								th:value="${book.author}" required="required"
+								placeholder="Origin" /> <span class="help-block">Plant Origin</span>
+						</div>
+					</div>
+
+					<!-- publisher -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="publisher">Plant Type</label>
+						<div class="col-md-8">
+							<input type="text" name="publisher" class="form-control"
+								id="publisher" th:value="${book.publisher}"
+								placeholder="Plant Type" /> <span class="help-block">Plant Type</span>
+						</div>
+					</div>
+
+					<!-- publication date -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="publicationDate">Plantation Date</label>
+						<div class="col-md-8">
+							<input type="date" class="form-control" id="publicationDate"
+								name="publicationDate" th:value="${book.publicationDate}"
+								placeholder="Plantation Date" /> <span class="help-block">Plantation Date</span>
+						</div>
+					</div>
+
+					<!-- language -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="language">Placement</label>
+						<div class="col-md-8">
+							<select th:value="${book.language}" id="language" name="language"
+								class="form-control">
+								<option value="Indoor">Indoor</option>
+								<option value="Outdoor">Outdoor</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- category -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="category">*
+							Category</label>
+						<div class="col-md-8">
+							<select th:value="${book.category}" id="category" name="category"
+								class="form-control">
+								<option value="" selected="selected" disabled="disabled">Please
+									select an option...</option>
+								<option value="Indoor Plants"
+									th:selected="(${book.category}=='Indoor Plants')">Indoor Plants</option>
+								<option value="Outdoor Plants"
+									th:selected="(${book.category}=='Outdoor Plants')">Outdoor Plants</option>
+								<option value="Bonsai Plants"
+									th:selected="(${book.category}=='Bonsai Plants')">Bonsai Plants</option>
+								<option value="Money Plants"
+									th:selected="(${book.category}=='Money Plants')">Money Plants</option>
+								<option value="Flower Plants"
+									th:selected="(${book.category}=='Flower Plants')">Flower Plants</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- pages -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="pageNumber">Life Expectancy</label>
+
+						<div class="col-md-8">
+							<input type="number" name="numberOfPages" class="form-control"
+								id="pageNumber" th:value="${book.numberOfPages}"
+								placeholder="Life Expectancy" /> <span class="help-block">Life Expectancy</span>
+						</div>
+					</div>
+
+					<!-- format -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="format">Water Consumption</label>
+						<div class="col-md-8">
+							<select th:value="${book.format}" id="format" name="format"
+								class="form-control">
+								<option value="Low">Low</option>
+								<option value="High">High</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- isbn -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="isbn">Plant Height</label>
+
+						<div class="col-md-8">
+							<input type="text" name="isbn" class="form-control" id="isbn"
+								th:value="${book.isbn}" placeholder="Plant Height" /> <span
+								class="help-block">Plant Height</span>
+						</div>
+					</div>
+
+					<!-- shipping weight -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="shippingWeight">Plant
+							Weight</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<input th:value="${book.shippingWeight}" type="number" step="0.01"
+									name="shippingWeight" class="form-control" id="shippingWeight"
+									placeholder="Plant Weight" /> <span
+									class="input-group-addon">Kg</span>
+							</div>
+							<span class="help-block">Plant Weight</span>
+						</div>
+					</div>
+
+					<!-- list price -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="listPrice">List
+							Price</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<span class="input-group-addon">$</span> <input
+									th:value="${book.listPrice}" type="number" name="listPrice" step="0.01"
+									class="form-control" id="listPrice" placeholder="List Price" />
+							</div>
+							<span class="help-block">List price of the Plant</span>
+						</div>
+					</div>
+
+					<!-- our price -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="ourPrice">Our
+							Price</label>
+						<div class="col-md-8">
+							<div class="input-group">
+								<span class="input-group-addon">$</span> <input
+									th:value="${book.ourPrice}" type="number" name="ourPrice" step="0.01"
+									class="form-control" id="ourPrice" placeholder="Our Price" />
+							</div>
+							<span class="help-block">Our price of the Plant</span>
+						</div>
+					</div>
+
+					<!-- in stock number -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="inStockNumber">Number
+							in stock</label>
+						<div class="col-md-8">
+							<input th:value="${book.inStockNumber}" type="number"
+								name="inStockNumber" class="form-control" id="inStockNumber"
+								placeholder="Plants in-stock" /> <span
+								class="help-block">Plants in-stock</span>
+						</div>
+					</div>
+
+					<!-- status of book -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="status">Status</label>
+						<div class="col-md-8">
+							<label><input value="true" type="radio" name="active"
+								checked="checked" /> Active </label> <label><input
+								value="false" type="radio" name="active" />
+								Inactive </label> <span class="help-block">Whether the Product is
+								active or inactive</span>
+						</div>
+					</div>
+
+					<!-- description -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="description">Description</label>
+						<div class="col-md-8">
+							<textarea name="description" rows="5" class="form-control"
+								id="description" th:value="${book.description}"
+								placeholder="Description" />
+							<span class="help-block">Description of the Plant</span>
+						</div>
+					</div>
+
+					<!-- upload image -->
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="bookImage">Upload Plant image</label>
+						</div>
+						<div class="col-md-8">
+							<input id="bookImage" type="file" name="bookImage"
+								th:value="${book.bookImage}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<button type="submit" class="btn btn-success">Update Plant</button>
+							<a class="btn btn-danger" th:href="@{/}">Cancel</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+
+	<div th:replace="common/header :: body-bottom-scripts" />
+</body>
+</html>
